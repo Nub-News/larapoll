@@ -17,8 +17,8 @@
                     <div class="radio">
                         <div class="flex items-center mr-4 mb-4">
                             <input type="radio" name="options" value="{{ $id }}" />
-                            <label class="flex items-center">
-                            <span class="inline-block mr-2 flex-no-shrink text-1xl font-medium"></span>
+                            <label class="flex items-center text-xl font-semibold">
+                            <span class="inline-block mr-2 flex-no-shrink"></span>
                                 {{ $name }}
                             </label>
                         </div>
