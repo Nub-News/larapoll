@@ -50,7 +50,9 @@ class VoteManagerController extends Controller
      */
     protected function resolveVoter(Request $request, Poll $poll)
     {
-        dd($request);
+        dd($request->voter);
+
+        // $voter = NewsletterSubscriber::where('subscriber_email_address', Crypt::decryptString($this->userEmail))->first();
 
         if($poll->canGuestVote()) {
             return new Guest($request);
