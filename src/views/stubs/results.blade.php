@@ -19,29 +19,9 @@
 
 <h2 class="text-xl font-semibold pb-3">Poll: {{ $question }}</h2>
 
-<div class="w-full bg-gray-200 rounded-full">
-    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-l-full" style="width: 25%"> 25%</div>
-</div>
-
-<div class="w-full bg-gray-200 h-1 mb-6">
-    <div class="bg-blue-600 h-1" style="width: 0%"></div>
-</div>
-<div class="w-full bg-gray-200 h-1 mb-6">
-    <div class="bg-blue-600 h-1" style="width: 25%"></div>
-</div>
-<div class="w-full bg-gray-200 h-1 mb-6">
-    <div class="bg-blue-600 h-1" style="width: 50%"></div>
-</div>
-<div class="w-full bg-gray-200 h-1 mb-6">
-    <div class="bg-blue-600 h-1" style="width: 75%"></div>
-</div>
-<div class="w-full bg-gray-200 h-1">
-    <div class="bg-blue-600 h-1" style="width: 100%"></div>
-</div>
-
 @foreach($options as $option)
     <div>
-        <h5 class="text-xl font-semibold pb-3">{{ $option->name }}</h5>
+        <h5 class="text-base font-semibold pt-3">{{ $option->name }}</h5>
         <div class="w-full bg-gray-200 rounded-full">
             <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-l-full" style="width: {{ $option->percent }}%"> {{ $option->percent }}%</div>
         </div>
