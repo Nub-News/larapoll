@@ -24,6 +24,8 @@ class VoteManagerController extends Controller
     {
         // $voteFor = $poll->options()->first();
 
+        dd($request->get('newsletter_id'));
+
         // a voter(user) picks a poll to vote for
         // only ids or array of ids are accepted
         // $voter->poll($poll)->vote($voteFor->getKey());
