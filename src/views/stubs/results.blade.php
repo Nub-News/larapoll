@@ -28,7 +28,7 @@
 
 @foreach($options as $option)
     <div class="w-full pb-3">
-        <h5 class="text-base font-semibold">{{ $option->name }}</h5>
+        <h5 class="text-xl font-semibold">{{ $option->name }}</h5>
         <div class="w-full bg-gray-200">
             <div class="bg-nubnewsred-800 text-1xl font-medium text-white text-center p-0.5 leading-none" style="width: {{ $option->percent }}%"> {{ $option->percent }}%</div>
         </div>
