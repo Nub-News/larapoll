@@ -15,7 +15,7 @@
             @foreach($options as $id => $name)
                 <li class="list-group-item">
                     <div class="radio">
-                        <div class="flex items-center mr-4 mb-4">
+                        <div class="flex items-center mr-4 mb-2 mt-2">
                             <input type="radio" name="options" value="{{ $id }}" />
                             <label class="flex items-center text-xl font-semibold">
                             <span class="inline-block mr-2 flex-no-shrink"></span>
