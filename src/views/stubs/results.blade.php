@@ -17,7 +17,7 @@
     </div>
 @endif
 
-<h2 class="text-xl font-semibold">Poll: {{ $question }}</h2>
+<h2 class="text-xl font-semibold pb-3">Poll: {{ $question }}</h2>
 
 <div class="w-full bg-gray-200 rounded-full">
     <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-l-full" style="width: 25%"> 25%</div>
@@ -40,12 +40,11 @@
 </div>
 
 @foreach($options as $option)
-    <div class="result-option-id">
-        <strong>{{ $option->name }}</strong><span class="pull-right">{{ $option->percent }}%</span>
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{ $option->percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $option->percent }}%">
-                <span class="sr-only">{{ $option->percent }}% Complete</span>
-            </div>
+    <div>
+        <h5 class="text-xl font-semibold pb-3">{{ $option->name }}</h5>
+        <div class="w-full bg-gray-200 rounded-full">
+            <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-l-full" style="width: {{ $option->percent }}%"> {{ $option->percent }}%</div>
         </div>
+        <div>
     </div>
 @endforeach
