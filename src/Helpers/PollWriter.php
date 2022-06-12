@@ -10,7 +10,7 @@ use Inani\Larapoll\Traits\PollWriterVoting;
 class PollWriter
 {
     use PollWriterResults,
-        PollWriterVoting;
+    PollWriterVoting;
 
     /**
      * Draw a Poll
@@ -32,18 +32,21 @@ class PollWriter
             return 'To start soon';
         }
 
-
-        $voter = $poll->canGuestVote() ? new Guest(request()) : auth(config('larapoll_config.admin_guard'))->user();
+        // Detect NewsletterSubscriber exists
+        $voter = $poll->canGuestVote() ? new Guest(request()) : NewsletterSubscriber::where('subscriber_email_address', Crypt::decryptString($this->userEmail))->first();
 
         if (is_null($voter) || $voter->hasVoted($poll->id) || $poll->isLocked()) {
             if (!$poll->showResultsEnabled()) {
                 return 'Thanks for voting';
             }
+
             return $this->drawResult($poll);
         }
+
         if ($poll->isRadio()) {
             return $this->drawRadio($poll);
         }
+
         return $this->drawCheckbox($poll);
     }
 }
