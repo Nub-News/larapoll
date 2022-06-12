@@ -22,7 +22,7 @@ class VoteManagerController extends Controller
         try {
             // $vote = $this->resolveVoter($request, $poll)
             $vote = $this->poll($poll)
-            ->vote($request->get('options'));
+            ->vote($request->get('options')->first());
 
             dd($vote);
 
