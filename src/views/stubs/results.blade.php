@@ -20,7 +20,7 @@
 <h2 class="text-xl font-semibold pb-3">Poll: {{ $question }}</h2>
 
 @foreach($options as $option)
-    <div class="w-full bg-gray-200 pb-3">
+    <div class="w-full pb-3">
         <h5 class="text-base font-semibold">{{ $option->name }}</h5>
         <div class="w-full bg-gray-200">
             <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none" style="width: {{ $option->percent }}%"> {{ $option->percent }}%</div>
