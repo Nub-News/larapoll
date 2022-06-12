@@ -11,10 +11,10 @@ class Guest
 {
     use Voter;
 
-    public $user_id;
+    public $newsletter_subscriber_id;
 
     public function __construct(Request $request)
     {
-            $this->user_id = $request->ip();
+            $this->newsletter_subscriber_id = $request->ip();
     }
 }

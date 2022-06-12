@@ -68,7 +68,7 @@ trait Voter
         if ($this instanceof Guest) {
             collect($options)->each(function ($option) {
                 Vote::create([
-                    'user_id' => $this->user_id,
+                    'newsletter_subscriber_id' => $this->newsletter_subscriber_id,
                     'option_id' => $option
                 ]);
             });
@@ -93,7 +93,7 @@ trait Voter
                 ->selectRaw('count(*) As total')
                 ->join('larapoll_options', 'larapoll_polls.id', '=', 'larapoll_options.poll_id')
                 ->join('larapoll_votes', 'larapoll_votes.option_id', '=', 'larapoll_options.id')
-                ->where('larapoll_votes.user_id', request()->ip())
+                ->where('larapoll_votes.newsletter_subscriber_id', request()->ip())
                 ->where('larapoll_options.poll_id', $poll_id)->count();
             return $result !== 0;
         }

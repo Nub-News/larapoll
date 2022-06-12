@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vote extends Model
 {
     protected $fillable = [
-        'user_id', 'option_id'
+        'newsletter_subscriber_id', 'option_id'
     ];
     protected $table = 'larapoll_votes';
 
