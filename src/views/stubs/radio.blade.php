@@ -25,11 +25,12 @@
                         </div>
 
 
-
+                        <!--
                         <label>
                             <input value="{{ $id }}" type="radio" name="options">
                             {{ $name }}
                         </label>
+                        -->
                     </div>
                 </li>
             @endforeach
