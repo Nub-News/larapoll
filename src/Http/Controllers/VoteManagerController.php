@@ -19,27 +19,25 @@ class VoteManagerController extends Controller
      */
     public function vote(Poll $poll, Request $request)
     {
-        dd($request->get('options'));
-
-        $voteFor = $poll->options()->first();
+        // $voteFor = $poll->options()->first();
 
         // a voter(user) picks a poll to vote for
         // only ids or array of ids are accepted
-        $voter->poll($poll)->vote($voteFor->getKey());
+        // $voter->poll($poll)->vote($voteFor->getKey());
+
+
 
 
         try {
-            // $vote = $this->resolveVoter($request, $poll)
-            $vote = $this->poll($poll)
-            ->vote($request->get('options')->first());
-
-            dd($vote);
+            $vote = $this->resolveVoter($request, $poll)
+            ->poll($poll)
+            ->vote($request->get('options'));
 
             if($vote) {
                 return back()->with('success', 'Vote Done');
             }
         } catch (Exception $e) {
-            // return back()->with('errors', $e->getMessage());
+            return back()->with('errors', $e->getMessage());
         }
     }
 
@@ -52,10 +50,12 @@ class VoteManagerController extends Controller
      */
     protected function resolveVoter(Request $request, Poll $poll)
     {
+        dd($request);
+
         if($poll->canGuestVote()) {
             return new Guest($request);
         }
 
-        return $request->user(config('larapoll_config.admin_guard'));
+        // return $request->user(config('larapoll_config.admin_guard'));
     }
 }
