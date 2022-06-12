@@ -18,7 +18,7 @@ class PollWriter
      * @param Poll $poll
      * @return string
      */
-    public function draw($poll)
+    public function draw($poll, $voterInfo)
     {
         if(is_int($poll)) {
             $poll = Poll::findOrFail($poll);
@@ -33,7 +33,7 @@ class PollWriter
         }
 
         // Detect NewsletterSubscriber exists
-        $voter = $poll->canGuestVote() ? new Guest(request()) : NewsletterSubscriber::where('subscriber_email_address', Crypt::decryptString($this->userEmail))->first();
+        $voter = $poll->canGuestVote() ? new Guest(request()) : $voterInfo;
 
         if (is_null($voter) || $voter->hasVoted($poll->id) || $poll->isLocked()) {
             if (!$poll->showResultsEnabled()) {
