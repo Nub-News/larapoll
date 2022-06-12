@@ -19,6 +19,15 @@ class VoteManagerController extends Controller
      */
     public function vote(Poll $poll, Request $request)
     {
+        dd($request->get('options')->first());
+
+        $voteFor = $poll->options()->first();
+
+        // a voter(user) picks a poll to vote for
+        // only ids or array of ids are accepted
+        $voter->poll($poll)->vote($voteFor->getKey());
+
+
         try {
             // $vote = $this->resolveVoter($request, $poll)
             $vote = $this->poll($poll)
@@ -30,7 +39,7 @@ class VoteManagerController extends Controller
                 return back()->with('success', 'Vote Done');
             }
         } catch (Exception $e) {
-            return back()->with('errors', $e->getMessage());
+            // return back()->with('errors', $e->getMessage());
         }
     }
 
