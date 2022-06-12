@@ -55,8 +55,6 @@ class VoteManagerController extends Controller
      */
     protected function resolveVoter(Request $request, Poll $poll)
     {
-        dd($request->get('newsletter_id'));
-
         if($poll->canGuestVote()) {
             return new Guest($request);
         }
