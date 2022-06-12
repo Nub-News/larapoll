@@ -14,16 +14,16 @@ class PollDashboardTest extends LarapollTestCase
     public function a_guest_doesnt_enter_to_dashboard()
     {
         $this->visit(route('poll.index'))
-            ->see('Login');
+        ->see('Login');
     }
 
     /** @test */
     public function an_authenticated_admin_enters_to_dashboard()
     {
         $this->beAdmin()
-            ->visit(route('poll.index'))
-            ->assertResponseStatus(200)
-            ->see('Polls');
+        ->visit(route('poll.index'))
+        ->assertResponseStatus(200)
+        ->see('Polls');
     }
 
     /** @test */
@@ -34,14 +34,14 @@ class PollDashboardTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $this->beAdmin()
-            ->visit(route('poll.index'))
-            ->see($poll->question)
-            ->see($poll->options_count)
-            ->see($poll->votes_count);
+        ->visit(route('poll.index'))
+        ->see($poll->question)
+        ->see($poll->options_count)
+        ->see($poll->votes_count);
     }
 
     /** @testt */
@@ -57,8 +57,8 @@ class PollDashboardTest extends LarapollTestCase
             'maxCheck' => 1
         ];
         $this->post(route('poll.store'), $request)
-            ->assertRedirectedTo(route('poll.index'))
-            ->assertSessionHas('success');
+        ->assertRedirectedTo(route('poll.index'))
+        ->assertSessionHas('success');
 
         $this->seeInDatabase('larapoll_polls', ['question' => $request['question']]);
     }
@@ -67,20 +67,21 @@ class PollDashboardTest extends LarapollTestCase
     public function an_admin_can_see_a_poll()
     {
         $this->beAdmin();
+
         $poll = new Poll([
             'question' => 'Who is the Best Player of the World?'
         ]);
 
         $poll->addOptions(['Cristiano Ronaldo', 'Lionel Messi', 'Neymar Jr'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $this->get(route('poll.edit', ['poll' => $poll->id]))
-            ->assertResponseStatus(200)
-            ->see($poll->question)
-            ->see('Cristiano Ronaldo')
-            ->see('Neymar Jr')
-            ->see('Lionel Messi');
+        ->assertResponseStatus(200)
+        ->see($poll->question)
+        ->see('Cristiano Ronaldo')
+        ->see('Neymar Jr')
+        ->see('Lionel Messi');
     }
 
     /** @test */
@@ -95,8 +96,8 @@ class PollDashboardTest extends LarapollTestCase
         ];
 
         $this->post(route('poll.options.add', ['id' => $poll->id]), $options)
-            ->assertResponseStatus(302)
-            ->assertSessionHas('success');
+        ->assertResponseStatus(302)
+        ->assertSessionHas('success');
 
         $this->seeInDatabase('larapoll_options', [
             'name' => $options['options'][0],
@@ -127,23 +128,26 @@ class PollDashboardTest extends LarapollTestCase
     public function an_admin_can_remove_unvoted_options()
     {
         $this->beAdmin();
+
         $poll = new Poll([
             'question' => 'Who is the Best Player of the World?'
         ]);
 
         $poll->addOptions(['Cristiano Ronaldo', 'Lionel Messi', 'Neymar Jr', 'Other'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $toDelete = $poll->options()->orderBy('id', 'desc')->first();
+
         $options = [
             'options' => [$toDelete->id]
         ];
+
         $this->delete(route('poll.options.remove', $poll->id), $options)
-            ->dontseeInDatabase('larapoll_options', [
-                'name' => $toDelete->name,
-                'id' => $toDelete->id
-            ]);
+        ->dontseeInDatabase('larapoll_options', [
+            'name' => $toDelete->name,
+            'id' => $toDelete->id
+        ]);
     }
 
     /** @test */
@@ -151,25 +155,27 @@ class PollDashboardTest extends LarapollTestCase
     {
 
         $this->beAdmin();
+
         $poll = new Poll([
             'question' => 'Who is the Best Player of the World?'
         ]);
 
         $poll->addOptions(['Cristiano Ronaldo', 'Lionel Messi', 'Neymar Jr', 'Other'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $voteFor = $poll->options()->first();
         $options = [
             'options' => [$voteFor->id]
         ];
+
         $this->user->poll($poll)->vote($voteFor->getKey());
 
         $this->delete(route('poll.options.remove', $poll->id), $options)
-            ->seeInDatabase('larapoll_options', [
-                'name' => $voteFor->name,
-                'id' => $voteFor->id
-            ]);
+        ->seeInDatabase('larapoll_options', [
+            'name' => $voteFor->name,
+            'id' => $voteFor->id
+        ]);
     }
 
     /** @testt */
@@ -182,15 +188,16 @@ class PollDashboardTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Cristiano Ronaldo', 'Lionel Messi', 'Neymar Jr', 'Other'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $options = [
             'count_check' => 2,
         ];
+
         $this->post(route('poll.update', $poll->id), $options)
-            ->assertResponseStatus(302)
-            ->assertEquals(2, Poll::findOrFail($poll->id)->maxCheck);
+        ->assertResponseStatus(302)
+        ->assertEquals(2, Poll::findOrFail($poll->id)->maxCheck);
     }
 
     /** @testt */
@@ -203,16 +210,16 @@ class PollDashboardTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Cristiano Ronaldo', 'Lionel Messi', 'Neymar Jr', 'Other'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $options = [
             'close' => 1,
         ];
 
         $this->post(route('poll.update', $poll->id), $options)
-            ->assertResponseStatus(302)
-            ->assertTrue(Poll::findOrFail($poll->id)->isLocked());
+        ->assertResponseStatus(302)
+        ->assertTrue(Poll::findOrFail($poll->id)->isLocked());
     }
 
     /** @testt */
@@ -225,15 +232,15 @@ class PollDashboardTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Cristiano Ronaldo', 'Lionel Messi', 'Neymar Jr', 'Other'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $this->assertTrue($poll->lock());
         $options = [];
 
         $this->post(route('poll.update', $poll->id), $options)
-            ->assertResponseStatus(302)
-            ->assertFalse(Poll::findOrFail($poll->id)->isLocked());
+        ->assertResponseStatus(302)
+        ->assertFalse(Poll::findOrFail($poll->id)->isLocked());
     }
 
     /** @test */
@@ -246,12 +253,12 @@ class PollDashboardTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Cristiano Ronaldo', 'Lionel Messi', 'Neymar Jr', 'Other'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $this->delete(route('poll.remove', $poll->id))
-            ->assertRedirectedTo(route('poll.index'))
-            ->assertSessionHas('success');
+        ->assertRedirectedTo(route('poll.index'))
+        ->assertSessionHas('success');
 
         $this->dontSeeInDatabase('larapoll_polls', ['id' => $poll->id]);
     }
@@ -264,6 +271,7 @@ class PollDashboardTest extends LarapollTestCase
         $this->be(
             $this->user = $this->makeUser()
         );
+        
         return $this;
     }
 

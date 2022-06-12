@@ -1,9 +1,9 @@
 <?php
 
-
 namespace Inani\Larapoll\Exceptions;
 
 use Exception;
+
 class CheckedOptionsException extends Exception
 {
     /**

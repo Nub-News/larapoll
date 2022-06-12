@@ -2,8 +2,6 @@
 
 namespace Inani\Larapoll\Http\Request;
 
-
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class AddOptionsRequest extends FormRequest

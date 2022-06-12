@@ -64,6 +64,7 @@ trait PollManipulator
 
         $oldOptions = [];
         $elements = $this->options()->pluck('id');
+
         foreach ($options as $option) {
             if (is_numeric($option) && is_int(intval($option))) {
                 $option = intval($option);
@@ -88,6 +89,7 @@ trait PollManipulator
         $diff = ($elements->count() - count($oldOptions));
         if ($diff == 0)
             throw new OptionsNotProvidedException();
+
         if ($diff == 1)
             throw new OptionsInvalidNumberProvidedException();
 

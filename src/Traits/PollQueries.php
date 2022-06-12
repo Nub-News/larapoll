@@ -2,7 +2,6 @@
 
 namespace Inani\Larapoll\Traits;
 
-
 trait PollQueries
 {
     protected $results = null;

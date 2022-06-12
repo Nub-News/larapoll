@@ -37,6 +37,7 @@ class PollManagerController extends Controller
             $poll->unlock_link = route('poll.unlock', $poll->id);
             return $poll;
         })->toArray();
+        
         return view('larapoll::dashboard.index', compact('polls'));
     }
 

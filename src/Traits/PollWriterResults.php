@@ -1,6 +1,6 @@
 <?php
-namespace Inani\Larapoll\Traits;
 
+namespace Inani\Larapoll\Traits;
 
 use Inani\Larapoll\Poll;
 
@@ -23,6 +23,7 @@ trait PollWriterResults
                 ];
         });
         $question = $poll->question;
+
         echo view(config('larapoll_config.results') ? config('larapoll_config.results') : 'larapoll::stubs.results', compact('options', 'question'));
     }
 }

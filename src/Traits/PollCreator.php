@@ -129,7 +129,7 @@ trait PollCreator
             $this->maxCheck = $this->maxSelection;
             $this->save();
             $this->options()
-                ->saveMany($this->instantiateOptions());
+            ->saveMany($this->instantiateOptions());
         });
 
         return true;

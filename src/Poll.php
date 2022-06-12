@@ -39,6 +39,7 @@ class Poll extends Model
             $poll->options->each(function ($option) {
                 Vote::where('option_id', $option->id)->delete();
             });
+            
             $poll->options()->delete();
         });
     }

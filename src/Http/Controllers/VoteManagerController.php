@@ -20,16 +20,15 @@ class VoteManagerController extends Controller
     public function vote(Poll $poll, Request $request)
     {
 
-        try{
-
+        try {
             $vote = $this->resolveVoter($request, $poll)
-                ->poll($poll)
-                ->vote($request->get('options'));
+            ->poll($poll)
+            ->vote($request->get('options'));
 
-            if($vote){
+            if($vote) {
                 return back()->with('success', 'Vote Done');
             }
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return back()->with('errors', $e->getMessage());
         }
     }
@@ -43,7 +42,7 @@ class VoteManagerController extends Controller
      */
     protected function resolveVoter(Request $request, Poll $poll)
     {
-        if($poll->canGuestVote()){
+        if($poll->canGuestVote()) {
             return new Guest($request);
         }
         return $request->user(config('larapoll_config.admin_guard'));

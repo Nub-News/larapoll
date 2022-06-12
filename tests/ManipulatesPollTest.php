@@ -20,11 +20,11 @@ class ManipulatesPollTest extends LarapollTestCase
         ];
 
         $this->visit(route('poll.options.push', $poll->id))
-            ->see($poll->question)
-            ->submitForm('Add', $input);
+        ->see($poll->question)
+        ->submitForm('Add', $input);
 
         $this->assertResponseStatus(200)
-            ->see('New poll options have been added successfully');
+        ->see('New poll options have been added successfully');
     }
 
     public function admin_can_remove_options()
@@ -44,8 +44,8 @@ class ManipulatesPollTest extends LarapollTestCase
         $this->beAdmin();
 
         $this->visit(route('poll.index'))
-            ->press('')
-            ->assertSessionHas('success');
+        ->press('')
+        ->assertSessionHas('success');
     }
 
     /**
@@ -57,6 +57,7 @@ class ManipulatesPollTest extends LarapollTestCase
         $this->be(
             $this->user = $this->makeUser()
         );
+        
         return $this;
     }
 

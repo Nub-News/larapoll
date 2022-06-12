@@ -20,11 +20,11 @@ class PollWriter
      */
     public function draw($poll)
     {
-        if(is_int($poll)){
+        if(is_int($poll)) {
             $poll = Poll::findOrFail($poll);
         }
 
-        if(!$poll instanceof Poll){
+        if(!$poll instanceof Poll) {
             throw new \InvalidArgumentException("The argument must be an integer or an instance of Poll");
         }
 

@@ -21,8 +21,8 @@ class PollTest extends LarapollTestCase
         ]);
 
         $bool = $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $this->assertTrue($bool);
         $this->assertTrue($poll->isRadio());
@@ -37,8 +37,8 @@ class PollTest extends LarapollTestCase
         ]);
 
         $bool = $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $this->assertTrue($bool);
         $this->assertTrue($poll->isRadio());
@@ -59,8 +59,8 @@ class PollTest extends LarapollTestCase
         ]);
 
         $bool = $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $this->assertTrue($bool);
         $this->assertEquals(4, $poll->optionsNumber());
@@ -79,8 +79,9 @@ class PollTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection(2)
-            ->generate();
+        ->maxSelection(2)
+        ->generate();
+
         $voteFor = $poll->options()->first();
         $this->assertTrue($voter->poll($poll)->vote($voteFor->getKey()));
     }
@@ -94,12 +95,15 @@ class PollTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection(2)
-            ->generate();
+        ->maxSelection(2)
+        ->generate();
+
         $voteFor = $poll->options()->get()->take(3)->pluck('id')->all();
+
         try {
             $voter->poll($poll)->vote($voteFor);
         } catch (\InvalidArgumentException $e) { }
+
         $this->assertNotNull($e);
     }
 
@@ -107,22 +111,25 @@ class PollTest extends LarapollTestCase
     public function it_doesnt_remove_voted_options_from_poll()
     {
         $voter = $this->makeUser();
+
         $poll = new Poll([
             'question' => 'What is the best PHP framework?'
         ]);
 
         $bool = $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection(2)
-            ->generate();
+        ->maxSelection(2)
+        ->generate();
 
         $this->assertTrue($bool);
         $this->assertEquals(4, $poll->optionsNumber());
 
         $option = $poll->options()->first();
         $this->assertTrue($voter->poll($poll)->vote($option->getKey()));
+
         try {
             $poll->detach($option);
         } catch (RemoveVotedOptionException $e) { }
+
         $this->assertNotNull($e);
 
         $this->assertEquals(4, $poll->optionsNumber());
@@ -138,8 +145,9 @@ class PollTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection(2)
-            ->generate();
+        ->maxSelection(2)
+        ->generate();
+
         $option = $poll->options()->first();
         $this->assertTrue($voter->poll($poll)->vote($option->getKey()));
         $this->assertTrue($anOtherVoter->poll($poll)->vote($option->getKey()));
@@ -157,8 +165,9 @@ class PollTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection(2)
-            ->generate();
+        ->maxSelection(2)
+        ->generate();
+
         $this->assertFalse($poll->isLocked());
         $this->assertTrue($poll->lock());
         $this->assertTrue($poll->isLocked());
@@ -173,8 +182,9 @@ class PollTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection(2)
-            ->generate();
+        ->maxSelection(2)
+        ->generate();
+
         $this->assertTrue($poll->lock());
         $option = $poll->options()->first();
 
@@ -183,6 +193,7 @@ class PollTest extends LarapollTestCase
         } catch (\Exception $e) {
             $this->assertTrue($e instanceof VoteInClosedPollException);
         }
+
         $this->assertNotNull($e);
     }
 
@@ -190,13 +201,15 @@ class PollTest extends LarapollTestCase
     public function it_does_reopen_a_closed_poll()
     {
         $voter = $this->makeUser();
+
         $poll = new Poll([
             'question' => 'What is the best PHP framework?'
         ]);
 
         $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection(2)
-            ->generate();
+        ->maxSelection(2)
+        ->generate();
+
         $this->assertTrue($poll->lock());
         $option = $poll->options()->first();
 
@@ -205,6 +218,7 @@ class PollTest extends LarapollTestCase
         } catch (\Exception $e) {
             $this->assertTrue($e instanceof VoteInClosedPollException);
         }
+
         $this->assertNotNull($e);
 
         $poll->unLock();
@@ -220,8 +234,8 @@ class PollTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
 
         $voteFor = $poll->options()->first();
 
@@ -229,6 +243,7 @@ class PollTest extends LarapollTestCase
 
         $id = $poll->id;
         $this->assertTrue($poll->remove());
+
         $this->dontSeeInDatabase('larapoll_options', [
             'poll_id' => $id
         ]);
@@ -256,13 +271,14 @@ class PollTest extends LarapollTestCase
     public function an_exception_will_be_thrown_if_admin_create_a_poll_with_duplicated_options()
     {
         $this->expectException(DuplicatedOptionsException::class);
+
         $poll = new Poll([
             'question' => 'What is the best PHP framework?'
         ]);
 
         $poll->addOptions(['Laravel', 'Laravel'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
     }
 
     /**
@@ -278,8 +294,9 @@ class PollTest extends LarapollTestCase
         ]);
 
         $poll->addOptions(['Laravel', 'Zend', 'Symfony', 'Cake'])
-            ->maxSelection()
-            ->generate();
+        ->maxSelection()
+        ->generate();
+
         return $poll;
     }
 

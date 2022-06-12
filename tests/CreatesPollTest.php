@@ -11,9 +11,9 @@ class CreatesPollTest extends LarapollTestCase
     public function create_form_is_shown()
     {
         $this->beAdmin()
-            ->visit(route('poll.create'))
-            ->assertResponseStatus(200)
-            ->see('Create');
+        ->visit(route('poll.create'))
+        ->assertResponseStatus(200)
+        ->see('Create');
     }
 
     /** @test */
@@ -24,9 +24,10 @@ class CreatesPollTest extends LarapollTestCase
             'options[0]' => 'Narcos',
             'options[1]' => 'Breaking Bad'
         ];
+
         $this->beAdmin()
-            ->visit(route('poll.create'))
-            ->submitForm('create', $input);
+        ->visit(route('poll.create'))
+        ->submitForm('create', $input);
     }
 
     /** @test */
@@ -35,12 +36,14 @@ class CreatesPollTest extends LarapollTestCase
         $input = [
             'question' => ''
         ];
+
         $this->beAdmin()
-            ->visit(route('poll.create'))
-            ->submitForm('create', $input)
-            ->see('Question should be asked')
-            ->see('Two options must be used at least');
+        ->visit(route('poll.create'))
+        ->submitForm('create', $input)
+        ->see('Question should be asked')
+        ->see('Two options must be used at least');
     }
+
     /**
      * Make a user and Connect as admin
      *
@@ -50,6 +53,7 @@ class CreatesPollTest extends LarapollTestCase
         $this->be(
             $this->user = $this->makeUser()
         );
+        
         return $this;
     }
 

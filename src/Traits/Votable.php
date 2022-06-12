@@ -48,6 +48,7 @@ trait Votable
     public function updateTotalVotes()
     {
         $this->votes = $this->countVotes();
+
         return $this->save();
     }
 }
