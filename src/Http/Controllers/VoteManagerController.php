@@ -24,7 +24,7 @@ class VoteManagerController extends Controller
     {
         // $voteFor = $poll->options()->first();
 
-        dd($request->get('newsletter_id'));
+        // dd($request->get('newsletter_id'));
 
         // a voter(user) picks a poll to vote for
         // only ids or array of ids are accepted
@@ -55,13 +55,13 @@ class VoteManagerController extends Controller
      */
     protected function resolveVoter(Request $request, Poll $poll)
     {
-        // dd($request->segments());
+        dd($request->get('newsletter_id'));
 
         if($poll->canGuestVote()) {
             return new Guest($request);
         }
 
-        $voter = NewsletterSubscriber::where('subscriber_email_address', Crypt::decryptString($this->userEmail))->first();
+        $voter = NewsletterSubscriber::where('subscriber_email_address', Crypt::decryptString($request->get('newsletter_id')))->first();
         return $voter;
         // return $request->user(config('larapoll_config.admin_guard'));
     }
