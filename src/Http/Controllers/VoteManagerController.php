@@ -50,13 +50,17 @@ class VoteManagerController extends Controller
      */
     protected function resolveVoter(Request $request, Poll $poll)
     {
-        dd($request->voter);
+        dd($request->voter());
 
         // $voter = NewsletterSubscriber::where('subscriber_email_address', Crypt::decryptString($this->userEmail))->first();
 
         if($poll->canGuestVote()) {
             return new Guest($request);
         }
+
+        return false;
+
+        // $voter = NewsletterSubscriber::where('subscriber_email_address', Crypt::decryptString($this->userEmail))->first();
 
         // return $request->user(config('larapoll_config.admin_guard'));
     }
