@@ -22,17 +22,6 @@ class VoteManagerController extends Controller
      */
     public function vote(Poll $poll, Request $request)
     {
-        // $voteFor = $poll->options()->first();
-
-        // dd($request->get('newsletter_id'));
-
-        // a voter(user) picks a poll to vote for
-        // only ids or array of ids are accepted
-        // $voter->poll($poll)->vote($voteFor->getKey());
-        // dd('here are the current segments');
-        // dd(request()->segments());
-
-
         try {
             $vote = $this->resolveVoter($request, $poll)
             ->poll($poll)
