@@ -9,6 +9,7 @@
     </div>
     <div class="panel-body">
         <ul class="list-group">
+            <input value="{{ request()->userEmail }}" type="hidden" name="newsletter_id">
             @foreach($options as $id => $name)
                 <li class="list-group-item">
                     <div class="radio">

@@ -27,8 +27,8 @@ class VoteManagerController extends Controller
         // a voter(user) picks a poll to vote for
         // only ids or array of ids are accepted
         // $voter->poll($poll)->vote($voteFor->getKey());
-        dd('here are the current segments');
-        dd(request()->segments());
+        // dd('here are the current segments');
+        // dd(request()->segments());
 
 
         try {
@@ -53,7 +53,7 @@ class VoteManagerController extends Controller
      */
     protected function resolveVoter(Request $request, Poll $poll)
     {
-        dd($request->segments());
+        // dd($request->segments());
 
         if($poll->canGuestVote()) {
             return new Guest($request);

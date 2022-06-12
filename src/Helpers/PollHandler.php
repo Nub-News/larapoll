@@ -13,7 +13,6 @@ use InvalidArgumentException;
 
 class PollHandler
 {
-
     /**
      * Create a Poll from Request
      *
