@@ -19,7 +19,7 @@ class VoteManagerController extends Controller
      */
     public function vote(Poll $poll, Request $request)
     {
-        dd($request->get('options')->first());
+        dd($request->get('options'));
 
         $voteFor = $poll->options()->first();
 
