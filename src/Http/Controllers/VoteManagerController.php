@@ -8,6 +8,9 @@ use Inani\Larapoll\Guest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\NewsletterSubscriber;
+use Illuminate\Support\Facades\Crypt;
+
 class VoteManagerController extends Controller
 {
     /**
@@ -24,8 +27,8 @@ class VoteManagerController extends Controller
         // a voter(user) picks a poll to vote for
         // only ids or array of ids are accepted
         // $voter->poll($poll)->vote($voteFor->getKey());
-
-
+        dd('here are the current segments');
+        dd(request()->segments());
 
 
         try {
@@ -50,18 +53,14 @@ class VoteManagerController extends Controller
      */
     protected function resolveVoter(Request $request, Poll $poll)
     {
-        dd($request->voter());
-
-        // $voter = NewsletterSubscriber::where('subscriber_email_address', Crypt::decryptString($this->userEmail))->first();
+        dd($request->segments());
 
         if($poll->canGuestVote()) {
             return new Guest($request);
         }
 
-        return false;
-
-        // $voter = NewsletterSubscriber::where('subscriber_email_address', Crypt::decryptString($this->userEmail))->first();
-
+        $voter = NewsletterSubscriber::where('subscriber_email_address', Crypt::decryptString($this->userEmail))->first();
+        return $voter;
         // return $request->user(config('larapoll_config.admin_guard'));
     }
 }
