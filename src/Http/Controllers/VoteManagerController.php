@@ -24,6 +24,8 @@ class VoteManagerController extends Controller
             $vote = $this->poll($poll)
             ->vote($request->get('options'));
 
+            dd($vote);
+
             if($vote) {
                 return back()->with('success', 'Vote Done');
             }
