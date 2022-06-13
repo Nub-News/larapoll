@@ -18,7 +18,7 @@
 @endif
 
 <div class="flex flex-col">
-    <div class="h-1 bg-gray-200 rounded overflow-hidden">
+    <div class="h-1 bg-gray-200 rounded overflow-hidden dark:hidden">
         <div class="w-24 h-full bg-nubnewsred-800"></div>
     </div>
     <div class="flex flex-wrap sm:flex-row flex-col pt-2 pb-1">
