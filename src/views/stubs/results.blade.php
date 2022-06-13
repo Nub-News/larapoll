@@ -22,13 +22,13 @@
         <div class="w-24 h-full bg-nubnewsred-800"></div>
     </div>
     <div class="flex flex-wrap sm:flex-row flex-col pt-2 pb-1">
-        <h1 class="flex-1 text-gray-900 dark:text-primary-light font-medium title-font text-2xl mb-2 sm:mb-2">Poll: <span class="text-nubnewsred-800 dark:text-white">{{ $question }}</span></h1>
+        <h1 class="flex-1 text-gray-900 dark:text-primary-light font-medium title-font text-2xl dark:text-sm mb-2 sm:mb-2">Poll: <span class="text-nubnewsred-800 dark:text-white">{{ $question }}</span></h1>
     </div>
 </div>
 
 @foreach($options as $option)
     <div class="w-full pb-3">
-        <h5 class="text-xl font-semibold">{{ $option->name }}</h5>
+        <h5 class="text-xl font-semibold dark:text-sm">{{ $option->name }}</h5>
         <div class="w-full bg-gray-200">
             <div class="bg-nubnewsred-800 text-1xl font-medium text-white text-center p-0.5 leading-none" style="width: {{ $option->percent }}%"> {{ $option->percent }}%</div>
         </div>
