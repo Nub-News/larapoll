@@ -5,7 +5,7 @@
             <div class="w-24 h-full bg-nubnewsred-800"></div>
         </div>
         <div class="flex flex-wrap sm:flex-row flex-col pt-2 pb-1">
-            <h1 class="flex-1 text-gray-900 font-medium title-font text-2xl mb-0 sm:mb-0">Poll: <span class="text-nubnewsred-800">{{ $question }}</span></h1>
+            <h1 class="flex-1 text-gray-900 font-medium title-font text-2xl mb-2 sm:mb-2">Poll: <span class="text-nubnewsred-800">{{ $question }}</span></h1>
         </div>
     </div>
 
