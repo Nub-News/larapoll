@@ -14,8 +14,8 @@ class Poll extends Model
 
     protected $fillable = [
         'question',
-        'start_at',
-        'end_at',
+        'starts_at',
+        'ends_at',
         'canVisitorsVote',
         'canVoterSeeResult'
     ];
