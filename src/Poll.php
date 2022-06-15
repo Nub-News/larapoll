@@ -12,7 +12,13 @@ class Poll extends Model
 {
     use PollCreator, PollAccessor, PollManipulator, PollQueries;
 
-    protected $fillable = ['question', 'canVisitorsVote', 'canVoterSeeResult'];
+    protected $fillable = [
+        'question',
+        'start_at',
+        'end_at',
+        'canVisitorsVote',
+        'canVoterSeeResult'
+    ];
 
     protected $table = 'larapoll_polls';
 
@@ -39,7 +45,7 @@ class Poll extends Model
             $poll->options->each(function ($option) {
                 Vote::where('option_id', $option->id)->delete();
             });
-            
+
             $poll->options()->delete();
         });
     }
