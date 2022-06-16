@@ -16,6 +16,7 @@ class Poll extends Model
         'question',
         'starts_at',
         'ends_at',
+        'isClosed',
         'canVisitorsVote',
         'canVoterSeeResult'
     ];
